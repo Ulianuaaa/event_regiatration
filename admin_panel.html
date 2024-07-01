@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .logout {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .status-filters {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 1rem;
+        }
+
+        .status-button {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #f0f0f0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 0.5rem;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+
+        .approve-button, .reject-button {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .approve-button {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .reject-button {
+            background-color: #dc3545;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Админ-панель | Иван Иванов</h1>
+            <a href="admin_sign_in.html" class="logout">Выход</a>
+        </header>
+        <div class="status-filters">
+            <button class="status-button" onclick="showAll()">Весь список</button>
+            <button class="status-button" onclick="filterStatus('Одобрено')">Одобрено</button>
+            <button class="status-button" onclick="filterStatus('Не одобрено')">Не одобрено</button>
+            <button class="status-button" onclick="filterStatus('На рассмотрении')">На рассмотрении</button>
+        </div>
+        <table id="data-table">
+            <thead>
+                <tr>
+                    <th>Статус</th>
+                    <th>Имя</th>
+                    <th>Отчество</th>
+                    <th>Фамилия</th>
+                    <th>Компания</th>
+                    <th>Должность</th>
+                    <th>Email</th>
+                    <th>Телефон</th>
+                    <th>Одобрить</th>
+                    <th>Отклонить</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Пример строки данных -->
+                <tr>
+                    <td class="status">На рассмотрении</td>
+                    <td>Иван</td>
+                    <td>Иванович</td>
+                    <td>Иванов</td>
+                    <td>Компания</td>
+                    <td>Должность</td>
+                    <td>example@example.com</td>
+                    <td>+79000000000</td>
+                    <td><button class="approve-button" onclick="changeStatus(this, 'Одобрено')">Одобрить</button></td>
+                    <td><button class="reject-button" onclick="changeStatus(this, 'Не одобрено')">Отклонить</button></td>
+                </tr>
+                <!-- Конец примера -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function changeStatus(button, newStatus) {
+            var row = button.parentNode.parentNode;
+            var statusCell = row.querySelector('.status');
+            statusCell.textContent = newStatus;
+        }
+
+        function filterStatus(status) {
+            var rows = document.querySelectorAll('#data-table tbody tr');
+            rows.forEach(function(row) {
+                var statusCell = row.querySelector('.status');
+                if (statusCell.textContent === status) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        function showAll() {
+            var rows = document.querySelectorAll('#data-table tbody tr');
+            rows.forEach(function(row) {
+                row.style.display = '';
+            });
+        }
+    </script>
+</body>
+</html>

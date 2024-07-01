@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход администратора</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Вход администратора</h1>
+        <form id="loginForm" method="POST" action="http://localhost:3000/login">
+            <label for="name">ФИО</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="password">Пароль</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Войти</button>
+        </form>
+        <p>Еще не зарегистрированы? <a href="admin_sign_up.html">Регистрация</a></p>
+    </div>
+</body>
+</html>
